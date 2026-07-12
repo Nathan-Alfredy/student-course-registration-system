@@ -3,6 +3,8 @@ package com.scrms.backend.model;
 import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.CascadeType;
 
 @Entity
 @Table(name = "departments")

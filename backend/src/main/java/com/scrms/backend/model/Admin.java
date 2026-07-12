@@ -54,5 +54,10 @@ import java.time.LocalDate;
         public void setPassword(String password) {
             this.password = password;
         }
+
+        @Override
+        public String getRole() {
+            return "Administrator";
+        }
     }
 

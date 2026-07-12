@@ -92,4 +92,6 @@ public abstract class Person {
         this.email = email;
         this.dateOfBirth = dateOfBirth;
     }
+
+    public abstract String getRole();
 }
