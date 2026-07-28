@@ -1,1 +1,121 @@
-<p>registrations works!</p>
+<h2>Registrations</h2>
+
+<div class="mb-3">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search by student or course..."
+    [(ngModel)]="searchText">
+</div>
+
+<div class="card p-3 mb-4">
+
+  <h4>{{ isEditing ? 'Edit Registration' : 'Register Student' }}</h4>
+
+  <div class="row">
+
+    <div class="col-md-6 mb-2">
+      <select class="form-select" [(ngModel)]="newRegistration.studentId">
+        <option [ngValue]="null" disabled>Select student</option>
+        <option *ngFor="let s of students" [ngValue]="s.id">
+          {{ s.firstName }} {{ s.lastName }} ({{ s.registrationNumber }})
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-6 mb-2">
+      <select class="form-select" [(ngModel)]="newRegistration.courseId">
+        <option [ngValue]="null" disabled>Select course</option>
+        <option *ngFor="let c of courses" [ngValue]="c.id">
+          {{ c.courseCode }} — {{ c.courseName }}
+        </option>
+      </select>
+    </div>
+
+    <div class="col-md-6 mb-2">
+      <input
+        type="date"
+        class="form-control"
+        [(ngModel)]="newRegistration.registrationDate">
+    </div>
+
+    <div class="col-md-6 mb-2">
+      <select class="form-select" [(ngModel)]="newRegistration.status">
+        <option value="PENDING">Pending</option>
+        <option value="APPROVED">Approved</option>
+        <option value="REJECTED">Rejected</option>
+      </select>
+    </div>
+
+    <div class="mt-3">
+      <button
+        *ngIf="!isEditing"
+        class="btn btn-success me-2"
+        (click)="saveRegistration()">
+        Save Registration
+      </button>
+
+      <button
+        *ngIf="isEditing"
+        class="btn btn-warning me-2"
+        (click)="updateRegistration()">
+        Update Registration
+      </button>
+
+      <button
+        *ngIf="isEditing"
+        class="btn btn-secondary"
+        (click)="cancelEdit()">
+        Cancel
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Student</th>
+      <th>Course</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let reg of filteredRegistrations()">
+      <td>{{ reg.id }}</td>
+      <td>{{ reg.student?.firstName }} {{ reg.student?.lastName }}</td>
+      <td>{{ reg.course?.courseCode }} — {{ reg.course?.courseName }}</td>
+      <td>{{ reg.registrationDate }}</td>
+      <td>
+        <span class="badge"
+          [class.bg-success]="reg.status === 'APPROVED'"
+          [class.bg-danger]="reg.status === 'REJECTED'"
+          [class.bg-secondary]="reg.status === 'PENDING'">
+          {{ reg.status }}
+        </span>
+      </td>
+      <td>
+        <button
+          class="btn btn-warning btn-sm me-2"
+          (click)="editRegistration(reg)">
+          Edit
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteRegistration(reg.id)">
+          Cancel
+        </button>
+      </td>
+    </tr>
+
+  </tbody>
+
+</table>

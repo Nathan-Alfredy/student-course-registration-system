@@ -15,4 +15,16 @@ export class StudentService {
     return this.http.get(this.apiUrl);
   }
 
+  addStudent(student: any): Observable<any> {
+  return this.http.post(this.apiUrl, student);
+  }
+
+  deleteStudent(id: number): Observable<any> {
+  return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  updateStudent(id: number, student: any): Observable<any> {
+  return this.http.put(`${this.apiUrl}/${id}`, student);
+  }
+
 }

@@ -1,1 +1,120 @@
-<p>courses works!</p>
+<h2>Courses</h2>
+
+<div class="mb-3">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search by course code or name..."
+    [(ngModel)]="searchText">
+</div>
+
+<div class="card p-3 mb-4">
+
+  <h4>{{ isEditing ? 'Edit Course' : 'Add Course' }}</h4>
+
+  <div class="row">
+
+    <div class="col-md-6 mb-2">
+      <input
+        class="form-control"
+        placeholder="Course Code (e.g. COE2201)"
+        [(ngModel)]="newCourse.courseCode">
+    </div>
+
+    <div class="col-md-6 mb-2">
+      <input
+        class="form-control"
+        placeholder="Course Name"
+        [(ngModel)]="newCourse.courseName">
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Credit Hours"
+        [(ngModel)]="newCourse.creditHours">
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <input
+        type="number"
+        class="form-control"
+        placeholder="Semester"
+        [(ngModel)]="newCourse.semester">
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <select class="form-select" [(ngModel)]="newCourse.departmentId">
+        <option [ngValue]="null" disabled>Select department</option>
+        <option *ngFor="let d of departments" [ngValue]="d.id">{{ d.departmentName }}</option>
+      </select>
+    </div>
+
+    <div class="mt-3">
+      <button
+        *ngIf="!isEditing"
+        class="btn btn-success me-2"
+        (click)="saveCourse()">
+        Save Course
+      </button>
+
+      <button
+        *ngIf="isEditing"
+        class="btn btn-warning me-2"
+        (click)="updateCourse()">
+        Update Course
+      </button>
+
+      <button
+        *ngIf="isEditing"
+        class="btn btn-secondary"
+        (click)="cancelEdit()">
+        Cancel
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Code</th>
+      <th>Name</th>
+      <th>Credit Hours</th>
+      <th>Semester</th>
+      <th>Department</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let course of filteredCourses()">
+      <td>{{ course.id }}</td>
+      <td>{{ course.courseCode }}</td>
+      <td>{{ course.courseName }}</td>
+      <td>{{ course.creditHours }}</td>
+      <td>{{ course.semester }}</td>
+      <td>{{ course.department?.departmentName || '—' }}</td>
+      <td>
+        <button
+          class="btn btn-warning btn-sm me-2"
+          (click)="editCourse(course)">
+          Edit
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteCourse(course.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+
+  </tbody>
+
+</table>

@@ -1,16 +1,46 @@
-<div class="container mt-5">
+<div class="container mt-4">
 
-  <h1 class="text-primary">
-    Student Course Registration Management System
-  </h1>
+  <h2 class="mb-4">Admin Dashboard</h2>
+  <p class="text-muted">Student Course Registration Management System</p>
 
-  <hr>
+  <div class="row">
 
-  <div class="card mt-4 shadow">
-    <div class="card-body">
-      <h4>Dashboard</h4>
-      <p>Welcome to SCRMS Dashboard.</p>
+    <div class="col-md-3">
+      <div class="card text-white bg-primary mb-3 shadow">
+        <div class="card-body">
+          <h5 class="card-title">Students</h5>
+          <h2>{{ totalStudents }}</h2>
+        </div>
+      </div>
     </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-success mb-3 shadow">
+        <div class="card-body">
+          <h5 class="card-title">Courses</h5>
+          <h2>{{ totalCourses }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-warning mb-3 shadow">
+        <div class="card-body">
+          <h5 class="card-title">Departments</h5>
+          <h2>{{ totalDepartments }}</h2>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card text-white bg-danger mb-3 shadow">
+        <div class="card-body">
+          <h5 class="card-title">Registrations</h5>
+          <h2>{{ totalRegistrations }}</h2>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 </div>

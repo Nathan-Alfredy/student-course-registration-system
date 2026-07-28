@@ -2,12 +2,20 @@
   <div class="container-fluid">
 
     <a class="navbar-brand" href="#">
-      SCRMS
+      SCRMS — Admin Panel
     </a>
 
-    <span class="navbar-text text-white">
+    <span class="navbar-text text-white me-auto ms-3">
       Student Course Registration Management System
     </span>
+
+    <span *ngIf="isLoggedIn" class="text-white me-3">
+      {{ username }}
+    </span>
+
+    <button *ngIf="isLoggedIn" class="btn btn-outline-light btn-sm" (click)="logout()">
+      Logout
+    </button>
 
   </div>
 </nav>

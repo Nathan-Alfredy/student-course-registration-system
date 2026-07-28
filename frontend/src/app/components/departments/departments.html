@@ -1,1 +1,100 @@
-<p>departments works!</p>
+<h2>Departments</h2>
+
+<div class="mb-3">
+  <input
+    type="text"
+    class="form-control"
+    placeholder="Search by department name or faculty..."
+    [(ngModel)]="searchText">
+</div>
+
+<div class="card p-3 mb-4">
+
+  <h4>{{ isEditing ? 'Edit Department' : 'Add Department' }}</h4>
+
+  <div class="row">
+
+    <div class="col-md-4 mb-2">
+      <input
+        class="form-control"
+        placeholder="Department Name"
+        [(ngModel)]="newDepartment.departmentName">
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <input
+        class="form-control"
+        placeholder="Faculty"
+        [(ngModel)]="newDepartment.faculty">
+    </div>
+
+    <div class="col-md-4 mb-2">
+      <input
+        class="form-control"
+        placeholder="Office Location"
+        [(ngModel)]="newDepartment.officeLocation">
+    </div>
+
+    <div class="mt-3">
+      <button
+        *ngIf="!isEditing"
+        class="btn btn-success me-2"
+        (click)="saveDepartment()">
+        Save Department
+      </button>
+
+      <button
+        *ngIf="isEditing"
+        class="btn btn-warning me-2"
+        (click)="updateDepartment()">
+        Update Department
+      </button>
+
+      <button
+        *ngIf="isEditing"
+        class="btn btn-secondary"
+        (click)="cancelEdit()">
+        Cancel
+      </button>
+    </div>
+
+  </div>
+
+</div>
+
+<table class="table table-bordered table-striped">
+
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Department Name</th>
+      <th>Faculty</th>
+      <th>Office Location</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <tr *ngFor="let dept of filteredDepartments()">
+      <td>{{ dept.id }}</td>
+      <td>{{ dept.departmentName }}</td>
+      <td>{{ dept.faculty }}</td>
+      <td>{{ dept.officeLocation }}</td>
+      <td>
+        <button
+          class="btn btn-warning btn-sm me-2"
+          (click)="editDepartment(dept)">
+          Edit
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="deleteDepartment(dept.id)">
+          Delete
+        </button>
+      </td>
+    </tr>
+
+  </tbody>
+
+</table>
