@@ -1,6 +1,8 @@
 package com.scrms.backend.model;
 
 import java.time.LocalDate;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,10 +27,12 @@ public class Registration {
     }
     @ManyToOne
     @JoinColumn(name = "student_id")
+    @JsonBackReference("student-registration")
     private Student student;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+    @JsonBackReference("course-registration")
     private Course course;
 
     public Registration(Long id, LocalDate registrationDate, String status) {

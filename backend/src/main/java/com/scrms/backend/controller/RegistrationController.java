@@ -37,4 +37,9 @@ public class RegistrationController {
     public void deleteRegistration(@PathVariable Long id) {
         registrationService.deleteRegistration(id);
     }
+
+    @PutMapping("/{id}")
+    public Registration updateRegistration(@PathVariable Long id, @RequestBody Registration registration) {
+        return registrationService.updateRegistration(id, registration);
+    }
 }

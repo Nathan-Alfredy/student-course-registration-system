@@ -1,5 +1,6 @@
 package com.scrms.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -20,6 +21,7 @@ import java.util.List;
         private Integer admissionYear;
 
         @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
+        @JsonManagedReference("student-registration")
         private List<Registration> registrations = new ArrayList<>();
 
         public Student() {

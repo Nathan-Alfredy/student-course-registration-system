@@ -28,6 +28,18 @@ public class RegistrationService {
         return registrationRepository.save(registration);
     }
 
+    public Registration updateRegistration(Long id, Registration registration) {
+        Registration existingRegistration = registrationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Registration not found"));
+
+        existingRegistration.setRegistrationDate(registration.getRegistrationDate());
+        existingRegistration.setStatus(registration.getStatus());
+        existingRegistration.setStudent(registration.getStudent());
+        existingRegistration.setCourse(registration.getCourse());
+
+        return registrationRepository.save(existingRegistration);
+    }
+
     public void deleteRegistration(Long id) {
         registrationRepository.deleteById(id);
     }

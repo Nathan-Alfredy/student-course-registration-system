@@ -1,5 +1,6 @@
 package com.scrms.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.JoinColumn;
@@ -28,6 +29,7 @@ public class Course {
     private Department department;
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    @JsonManagedReference("course-registration")
     private List<Registration> registrations = new ArrayList<>();
 
     public Course() {

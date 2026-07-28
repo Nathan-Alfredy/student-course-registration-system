@@ -28,6 +28,19 @@ public class CourseService {
         return courseRepository.save(course);
     }
 
+    public Course updateCourse(Long id, Course course) {
+        Course existingCourse = courseRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found"));
+
+        existingCourse.setCourseCode(course.getCourseCode());
+        existingCourse.setCourseName(course.getCourseName());
+        existingCourse.setCreditHours(course.getCreditHours());
+        existingCourse.setSemester(course.getSemester());
+        existingCourse.setDepartment(course.getDepartment());
+
+        return courseRepository.save(existingCourse);
+    }
+
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);
     }

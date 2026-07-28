@@ -4,7 +4,7 @@ import com.scrms.backend.model.Admin;
 import com.scrms.backend.service.AdminService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+        import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,6 +31,11 @@ public class AdminController {
     @PostMapping
     public Admin saveAdmin(@RequestBody Admin admin) {
         return adminService.saveAdmin(admin);
+    }
+
+    @PutMapping("/{id}")
+    public Admin updateAdmin(@PathVariable Long id, @RequestBody Admin admin) {
+        return adminService.updateAdmin(id, admin);
     }
 
     @DeleteMapping("/{id}")
